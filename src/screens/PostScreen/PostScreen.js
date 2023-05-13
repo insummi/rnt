@@ -4,7 +4,6 @@ import { Text, Image } from "react-native";
 
 export const PostScreen = ({ route }) => {
   const { item } = route.params;
-  console.log({ item });
 
   return (
     <PostView>

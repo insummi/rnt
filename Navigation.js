@@ -22,21 +22,21 @@ export const Navigation = () => {
             headerTitle: () => (
               <Button
                 onPress={() => alert("This is a button!")}
-                title="Info"
-                color="#810823"
+                title="TitleButton"
+                color="#539899"
               />
             ),
             headerRight: () => (
               <Button
                 onPress={() => alert("This is a button!")}
-                title="Info"
+                title="headerRight"
                 color="#810823"
               />
             ),
             headerLeft: () => (
               <Button
                 onPress={() => navigation.navigate("Home")}
-                title="Home"
+                title="headerLeft"
                 color="#543689"
               />
             ),
