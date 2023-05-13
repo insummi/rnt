@@ -1,24 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
+import React from "react";
 import styled from "styled-components/native";
+import { Navigation } from "./Navigation";
 
-const AppContainer = styled.View`
-  display: flex;
+const SafeArea = styled.SafeAreaView`
   flex: 1;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  padding: 20px;
-  `
-
-const StyledText = styled.Text`
-  color: green;
-`
+`;
 
 export default function App() {
   return (
-    <AppContainer>
-      <StyledText>Open up App.js to start working on your app!</StyledText>
-      <StatusBar style="auto" />
-    </AppContainer>
+    <SafeArea>
+      <Navigation />
+    </SafeArea>
   );
 }
