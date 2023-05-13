@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   View,
   Text,
@@ -37,7 +37,24 @@ const Posts = () => {
       .finally(() => setLoading(false));
   };
 
+  const _keyExtractor = (item) => item.id;
+
   useEffect(getPhotos, []);
+
+  const renderItem = useCallback(
+    ({ item }) => (
+      <TouchableOpacity onPress={() => navigation.navigate("Post", { item })}>
+        <PostView>
+          <PostImage source={{ url: item?.thumbnailUrl }} />
+          <PostDetails>
+            <PostTitle>{item?.title}</PostTitle>
+            <PostText>{item?.id}</PostText>
+          </PostDetails>
+        </PostView>
+      </TouchableOpacity>
+    ),
+    [posts]
+  );
 
   if (isLoading) {
     return (
@@ -57,22 +74,12 @@ const Posts = () => {
   return (
     <FlatList
       data={posts}
-      keyExtractor={(item) => item.id}
-      initialNumToRender={4}
+      keyExtractor={_keyExtractor}
+      initialNumToRender={10}
       refreshControl={
         <RefreshControl refreshing={isLoading} onRefresh={getPhotos} />
       }
-      renderItem={({ item }) => (
-        <TouchableOpacity onPress={() => navigation.navigate("Post", { item })}>
-          <PostView key={item?.id}>
-            <PostImage source={{ url: item?.thumbnailUrl }} />
-            <PostDetails>
-              <PostTitle>{item?.title}</PostTitle>
-              <PostText>{item?.id}</PostText>
-            </PostDetails>
-          </PostView>
-        </TouchableOpacity>
-      )}
+      renderItem={renderItem}
     />
   );
 };
